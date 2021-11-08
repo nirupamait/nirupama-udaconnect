@@ -1,0 +1,20 @@
+Reason for conversion from Monoliths to Microservices:: Since UdaConnect Application needs to be enhanced at large scale, so it should be migrated to
+microservice based architecture.Also, micriservices are more scalable i.e. one component can be enhanced without affecting the others.Microservices
+are more flexible and it has less downtime.
+
+Decision for using grpc for passing person's location data to location microservice from various source like mobile:: 
+Grpc is new technology which is best in using mobile application as it provides high bandwidth.Grps reduces latency delay in network
+at cost of less flexibility.
+https://dzone.com/articles/grpc-basics-why-when-and-how
+
+Decision of using Kaafka for collecting used based location data:: 
+Kaaka is best for use for collecting used based activities like location data information becuase it is based on publish subscribe data and it uses
+in-memory of microservices. It is distributed based messaging strategy, which deals with large amout of data.It is more flexible, reliable.
+https://bernardmarr.com/what-is-kafka-a-super-simple-explanation-of-this-important-data-analytics-tool/#:~:text=Kafka%20is%20an%20open%20source,offering%20support%20for%20new%20users.
+
+
+Decision of using rest api(Person and Connection) from front-end web :: Rest API is widely adopted open source technology.It is more flexible,
+and data is not strictly typed.It can handle many types of data like xml,json,plain text.
+https://www.pluralsight.com/blog/tutorials/representational-state-transfer-tips
+https://www.bbvaapimarket.com/en/api-world/rest-api-what-it-and-what-are-its-advantages-project-development/
+

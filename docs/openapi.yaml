@@ -1,0 +1,102 @@
+openapi: 3.0.0
+info:
+  title: Person Endpoints
+  description: Manage the Persons data in UdaConnect Project.
+  version: 1.0.0
+paths:
+  /api/persons:
+    get:
+      summary: Retrieve all persons from repository.
+      description: By calling api/persons, you can retrieve all persons information.
+      operationId: get
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+    post:
+      summary: Create person in UdaConnect repository.
+      description: Adds person to repository.
+      operationId: createPerson
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonId'
+      responses:
+       '201':
+          description: Item created
+        '400':
+          description: Invalid input, object invalid
+        '409':
+          description: An existing item already exists
+  /api/persons/{personId}:
+    get:
+      summary: Retrieve person from repository.
+      description: By passing in person id, you can retrieve the person information.
+      operationId: getPersonById
+      parameters:
+      - name: personId
+        in: path
+        description: Id of person to get.
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully retrieved person.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        "400":
+          description: bad input parameter
+        "404":
+          description: company not found
+    components:
+      schemas:
+        Person:
+          required:
+          - id
+          - first_name
+          - last_name
+          - company_name
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            first_name:
+              type: string
+              example: Francisco
+            last_name:
+              type: string
+              example: Medeiros
+            company_name:
+              type: string
+              example: SelfEmployed
+    '/api/persons/{person_id}/connection':
+        parameters:
+          - in: query
+            description: Proximity to a given user in meters
+            name: distance
+            type: string
+          - in: query
+            description: Upper bound of date range
+            name: end_date
+            type: string
+          - in: query
+            description: Lower bound of date range
+            name: start_date
+            type: string
+          - name: person_id
+            in: path
+            required: true
+            type: string
+        get:
+          responses:
+            '200':
+              description: Success
+          operationId: getConnection
